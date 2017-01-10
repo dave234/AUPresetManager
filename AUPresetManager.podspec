@@ -35,6 +35,7 @@ Apple's esoteric format for the AUSampler audioUnit usually has to be created on
   s.resource_bundles = {
     'AUPresetManager' => ['AUPresetManager/Assets/*.aupreset']
   }
+  s.frameworks = 'AudioToolbox'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
