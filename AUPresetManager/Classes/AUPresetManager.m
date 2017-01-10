@@ -118,7 +118,6 @@
 }
 
 NSDictionary *waveformsPathIndexed(NSArray <AUPresetZone *> *presetZones){
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSSet *filePaths = [NSSet setWithArray:[presetZones valueForKey:@"filePath"]];
     NSMutableDictionary *waveformsPathIndexed = [[NSMutableDictionary alloc]init];
     int nextWaveformId = STARTINGWAVEFORMID;
