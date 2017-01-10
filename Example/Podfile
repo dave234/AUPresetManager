@@ -1,0 +1,6 @@
+use_frameworks!
+target 'AUPresetManager_Tests' do
+  pod 'AUPresetManager', :path => '../'
+  
+  
+end

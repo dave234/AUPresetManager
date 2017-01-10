@@ -1,0 +1,16 @@
+PODS:
+  - AUPresetManager (0.1.0)
+
+DEPENDENCIES:
+  - AUPresetManager (from `../`)
+
+EXTERNAL SOURCES:
+  AUPresetManager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AUPresetManager: e50a325b7d46aba9d3637de35ee32734db716c78
+
+PODFILE CHECKSUM: 557c9de72af146d6b7d2d776c5dd361b567242be
+
+COCOAPODS: 1.1.1
