@@ -60,6 +60,7 @@
              @"ID":self.ID};
 }
 -(instancetype)initWithFilePath:(NSString *)filePath andKey:(int)key{
+    NSAssert([[NSFileManager defaultManager]fileExistsAtPath:filePath], @"No file at %@",filePath);
     self = [super init];
     if (self) {
         self.enabled = 1;
@@ -103,9 +104,6 @@ NSDictionary *waveformsPathIndexed(NSArray <AUPresetZone *> *presetZones){
     NSMutableDictionary *waveformsPathIndexed = [[NSMutableDictionary alloc]init];
     int nextWaveformId = STARTINGWAVEFORMID;
     for (NSString *path in filePaths){
-        if(![fileManager fileExistsAtPath:path]){
-            NSLog(@"file doesn't exist at %@",path);
-        }
         waveformsPathIndexed[path] = @(nextWaveformId);
         nextWaveformId++;
     }
@@ -119,10 +117,7 @@ NSMutableDictionary *mutableSkeleton(){
         if(!skeletonURL){
             skeletonURL = [[NSBundle mainBundle]URLForResource:@"Skeleton" withExtension:@"aupreset"];
         }
-        if(!skeletonURL){
-            NSLog(@"Skeleton file not found");
-            return NULL;
-        }
+        NSCAssert(skeletonURL != NULL,@"Skeleton file not found");
         skeleton = [NSDictionary dictionaryWithContentsOfURL:skeletonURL];
     }
     
