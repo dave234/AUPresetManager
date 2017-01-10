@@ -18,14 +18,14 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Apple's esoteric format for the AUSampler audioUnit usually has to be created on a Mac.  Edited on the mac, with file references and all, then imported into an iOS project in the app bundle.  This class uses a skeleton file (created on a Mac), then is able to dynamically generate the AUPreset dictionary so that files can be loaded on the fly.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/AUPresetManager'
+  s.homepage         = 'https://github.com/dave234/AUPresetManager'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'dave234' => 'dave234@users.noreply.github.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/AUPresetManager.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/dave234/AUPresetManager.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
