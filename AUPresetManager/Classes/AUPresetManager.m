@@ -71,14 +71,22 @@
     }
     return self;
 }
-+(AUPresetZone *)WithFilePath:(NSString *)filePath andKey:(int)key{
++(AUPresetZone *)zoneWithFilePath:(NSString *)filePath andKey:(int)key{
     return [[AUPresetZone alloc]initWithFilePath:filePath andKey:key];
 }
 @end
 
 
 @implementation AUPresetManager
-
++(NSDictionary *)presetWithFilePaths:(NSArray <NSString *>*)filePaths oneShot:(BOOL)oneShot{
+    NSMutableArray *zones = [[NSMutableArray alloc]initWithCapacity:filePaths.count];
+    for (int i = 0; i < filePaths.count; i++) {
+        NSString *filePath = filePaths[i];
+        NSAssert([[NSFileManager defaultManager]fileExistsAtPath:filePath], @"No file at %@",filePath);
+        [zones addObject:[AUPresetZone zoneWithFilePath:filePath andKey:i]];
+    }
+    return [AUPresetManager presetWithZones:zones oneShot:1];
+}
 +(NSDictionary *)presetWithZones:(NSArray <AUPresetZone *> *)presetZones oneShot:(BOOL)oneShot{
     NSMutableDictionary *preset = mutableSkeleton();
     NSDictionary *waveFormIds = waveformsPathIndexed(presetZones);
@@ -96,6 +104,17 @@
     }
     preset.oneShot = oneShot;
     return preset;
+}
++(NSDictionary *)samplerPreset:(AudioUnit)samplerUnit{
+    CFPropertyListRef presetPlist;
+    UInt32 presetPlistSize;
+    AudioUnitGetProperty(samplerUnit, kAudioUnitProperty_ClassInfo, kAudioUnitScope_Global, 0, &presetPlist, &presetPlistSize);
+    NSDictionary *presetDict = (__bridge_transfer NSDictionary *)presetPlist;
+    return presetDict;
+}
++(void)setPreset:(NSDictionary *)preset forSampler:(AudioUnit)sampler{
+    CFPropertyListRef presetPlist = (__bridge CFPropertyListRef)preset;
+    AudioUnitSetProperty(sampler,kAudioUnitProperty_ClassInfo,kAudioUnitScope_Global,0,&presetPlist,sizeof(presetPlist));
 }
 
 NSDictionary *waveformsPathIndexed(NSArray <AUPresetZone *> *presetZones){

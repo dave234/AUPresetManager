@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AUPresetZone : NSObject
 @property BOOL      enabled;
@@ -15,14 +16,16 @@
 @property int       minKey;
 @property int       rootKey;
 @property NSString *filePath;
-/*
- Initializes to a non pitch tracking sample (ie: for drums)
- All samples refered to by filePath must be in a "Sounds" Folder Reference (Not Xcode group) located in the Application bundle 
-*/
+
+//Initializes to a non pitch tracking sample (ie: for drums)
 -(instancetype)initWithFilePath:(NSString *)filePath andKey:(int)key;
-+(AUPresetZone *)WithFilePath:(NSString *)filePath andKey:(int)key;
++(AUPresetZone *)zoneWithFilePath:(NSString *)filePath andKey:(int)key;
 @end
 
 @interface AUPresetManager : NSObject
+//This creates a preset where each file's note is set to it's index in the filePaths array.
++(NSDictionary *)presetWithFilePaths:(NSArray <NSString *>*)filePaths oneShot:(BOOL)oneShot;
 +(NSDictionary *)presetWithZones:(NSArray <AUPresetZone *> *)presetZones oneShot:(BOOL)oneShot;
++(NSDictionary *)samplerPreset:(AudioUnit)samplerUnit;
++(void)setPreset:(NSDictionary *)preset forSampler:(AudioUnit)sampler;
 @end
