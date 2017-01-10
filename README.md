@@ -5,10 +5,6 @@
 [![License](https://img.shields.io/cocoapods/l/AUPresetManager.svg?style=flat)](http://cocoapods.org/pods/AUPresetManager)
 [![Platform](https://img.shields.io/cocoapods/p/AUPresetManager.svg?style=flat)](http://cocoapods.org/pods/AUPresetManager)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
 
 ## Installation
