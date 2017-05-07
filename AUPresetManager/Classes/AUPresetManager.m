@@ -130,8 +130,10 @@ NSDictionary *waveformsPathIndexed(NSArray <AUPresetZone *> *presetZones){
 NSMutableDictionary *mutableSkeleton(){
     static NSDictionary *skeleton = NULL;
     if (!skeleton) {
-        NSString *skeletonPath = [@"AUPresetManager.bundle" stringByAppendingPathComponent:@"Skeleton"];
-        NSURL *skeletonURL = [[NSBundle mainBundle] URLForResource:skeletonPath withExtension:@"aupreset"];
+        NSBundle *framworkBundle = [NSBundle bundleForClass:AUPresetManager.class];
+        NSString *bundlePath = [framworkBundle pathForResource:@"AUPresetManager" ofType:@"bundle"];
+        NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+        NSURL *skeletonURL = [bundle URLForResource:@"Skeleton" withExtension:@"aupreset"];
         if(!skeletonURL){
             skeletonURL = [[NSBundle mainBundle]URLForResource:@"Skeleton" withExtension:@"aupreset"];
         }

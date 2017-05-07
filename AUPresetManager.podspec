@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUPresetManager'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'A class used to create presets for core audio\'s AUSampler'
 
 # This description is used to generate tags and improve search results.
